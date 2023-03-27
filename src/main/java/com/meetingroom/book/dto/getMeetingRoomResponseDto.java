@@ -1,6 +1,6 @@
 package com.meetingroom.book.dto;
 
-public class getMeetingRoomResponseDto {
+public class GetMeetingRoomResponseDto {
 	
 	private String roomId;
 	

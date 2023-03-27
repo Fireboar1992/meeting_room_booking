@@ -11,7 +11,6 @@ import com.meetingroom.book.dto.LoginRequestDto;
 @RequestMapping(value = "/user")
 public class UserController {
 
-	
 	@PostMapping(path = "/login")	
 	public String login(@RequestBody LoginRequestDto loginRequestDto) {
 		
