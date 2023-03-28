@@ -1,28 +1,14 @@
 package com.meetingroom.book.dto;
 
-public class GetMeetingRoomResponseDto {
-	
-	private Long roomId;
+public class BookMeetingRoomRequestDto {
 	
 	private String roomName;
-	
-	private Integer bookingStatus;
 	
 	private String startTime;
 	
 	private String endTime;
 	
-	private String lastUpdateTime;
-	
 	private String bookedBy;
-
-	public Long getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(Long roomId) {
-		this.roomId = roomId;
-	}
 
 	public String getRoomName() {
 		return roomName;
@@ -30,14 +16,6 @@ public class GetMeetingRoomResponseDto {
 
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
-	}
-
-	public Integer getBookingStatus() {
-		return bookingStatus;
-	}
-
-	public void setBookingStatus(Integer bookingStatus) {
-		this.bookingStatus = bookingStatus;
 	}
 
 	public String getStartTime() {
@@ -56,14 +34,6 @@ public class GetMeetingRoomResponseDto {
 		this.endTime = endTime;
 	}
 
-	public String getLastUpdateTime() {
-		return lastUpdateTime;
-	}
-
-	public void setLastUpdateTime(String lastUpdateTime) {
-		this.lastUpdateTime = lastUpdateTime;
-	}
-
 	public String getBookedBy() {
 		return bookedBy;
 	}
@@ -72,5 +42,4 @@ public class GetMeetingRoomResponseDto {
 		this.bookedBy = bookedBy;
 	}
 
-	  
 }
