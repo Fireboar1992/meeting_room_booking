@@ -41,11 +41,38 @@ public class BookController {
 		
 	}
 	
-	@PostMapping(path = "/bookMeetingRoom")
+	@PutMapping(path = "/bookMeetingRoom")
 	public String bookMeetingRoom(@Validated @RequestBody BookMeetingRoomRequestDto bookMeetingRoomRequestDto) throws Exception {
 		
 		return meetingRoomService.bookMeetingRoom(bookMeetingRoomRequestDto);
 		
+	}
+	
+	@GetMapping(path = "/getAvailableRoom")
+	public List<GetMeetingRoomResponseDto> getAvailableRoom() {
+		
+		List<GetMeetingRoomResponseDto> response = meetingRoomService.getAvailableRoom();
+		
+		return response;
+		
+	}
+	
+	@GetMapping(path = "/getBookedRoom")
+	public List<GetMeetingRoomResponseDto> getBookedRoom() {
+		
+		List<GetMeetingRoomResponseDto> response = meetingRoomService.getBookedRoom();
+		
+		return response;
+		
+	}
+	
+	@PutMapping(path = "/cancelBookedRoom")
+	public String cancelBookedRoom() {
+		
+		String response = meetingRoomService.cancelBookedRoom();
+		
+		return response;
+			
 	}
 	
 }
