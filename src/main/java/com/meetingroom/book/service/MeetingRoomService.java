@@ -23,6 +23,9 @@ public class MeetingRoomService {
 	
 	@Autowired
 	MeetingRoomRepository meetingRoomRepository;
+	
+	static final int STATUS_BOOKED = 1;
+	static final int STATUS_AVAILABLE = 0;
 
 	public CreateMeetingRoomResponseDto createMeetingRoom(CreateMeetingRoomRequestDto createMeetingRoomRequestDto) {
 		
@@ -124,13 +127,19 @@ public class MeetingRoomService {
 			throw new Exception();
 		}
 		
+		if (selectedMeetingRoomEntity.getStatus() == STATUS_BOOKED) {
+			
+			return "The " + roomName + " is be booked";
+			
+		}
+		
 		Date date = new Date();
 		
 		MeetingRoomEntity meetingRoomEntity = new MeetingRoomEntity();
 		meetingRoomEntity.setId(selectedMeetingRoomEntity.getId());
 		meetingRoomEntity.setName(selectedMeetingRoomEntity.getName());
 		meetingRoomEntity.setCapacity(selectedMeetingRoomEntity.getCapacity());
-		meetingRoomEntity.setStatus(1);
+		meetingRoomEntity.setStatus(STATUS_BOOKED);
 		meetingRoomEntity.setLastUpdateTime(date);
 		meetingRoomEntity.setBookBy("sung");
 		
@@ -138,6 +147,88 @@ public class MeetingRoomService {
 		meetingRoomRepository.save(meetingRoomEntity);
 		
 		return "The " + roomName + " is successfully booked";
+		
+	}
+	
+	public List<GetMeetingRoomResponseDto> getAvailableRoom() {
+		
+		Optional<List<MeetingRoomEntity>> results = meetingRoomRepository.findByStatus(STATUS_AVAILABLE);
+		
+		List<MeetingRoomEntity> meetingRooms = new ArrayList<MeetingRoomEntity>();
+		if (results.isPresent()) {
+			meetingRooms = results.get();
+		}
+		
+		List<GetMeetingRoomResponseDto> response = new ArrayList<GetMeetingRoomResponseDto>();
+		response = this.assembleGetResponse(meetingRooms);
+		
+		return response;
+		
+	}
+	
+	public List<GetMeetingRoomResponseDto> getBookedRoom() {
+		
+		Optional<List<MeetingRoomEntity>> results = meetingRoomRepository.findByStatus(STATUS_BOOKED);
+		
+		List<MeetingRoomEntity> meetingRooms = new ArrayList<MeetingRoomEntity>();
+		if (results.isPresent()) {
+			meetingRooms = results.get();
+		}
+		
+		List<GetMeetingRoomResponseDto> response = new ArrayList<GetMeetingRoomResponseDto>();
+		response = this.assembleGetResponse(meetingRooms);
+		
+		return response;
+		
+	}
+	
+	private List<GetMeetingRoomResponseDto> assembleGetResponse(List<MeetingRoomEntity> meetingRoomList) {
+		
+		List<GetMeetingRoomResponseDto> results = new ArrayList<GetMeetingRoomResponseDto>();
+		meetingRoomList.forEach(meetingRoom -> {
+			
+			GetMeetingRoomResponseDto getMeetingRoomResponseDto = new GetMeetingRoomResponseDto();
+			getMeetingRoomResponseDto.setRoomId(meetingRoom.getId());
+			getMeetingRoomResponseDto.setRoomName(meetingRoom.getName());
+			getMeetingRoomResponseDto.setBookingStatus(meetingRoom.getStatus());
+			
+			Date startTime = meetingRoom.getStartTime();
+			
+			if (startTime != null) {
+				getMeetingRoomResponseDto.setStartTime(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(startTime));
+			} else {
+				getMeetingRoomResponseDto.setStartTime("");
+			}
+			
+			Date endTime = meetingRoom.getEndTime();
+			
+			if (endTime != null) {
+				getMeetingRoomResponseDto.setEndTime(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(meetingRoom.getEndTime()));
+			} else {
+				getMeetingRoomResponseDto.setEndTime("");
+			}
+			
+			Date lastUpdateTime = meetingRoom.getLastUpdateTime();
+			
+			if (lastUpdateTime != null) {
+				getMeetingRoomResponseDto.setLastUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(meetingRoom.getLastUpdateTime()));
+			} else {
+				getMeetingRoomResponseDto.setLastUpdateTime("");
+			}
+			
+			String bookBy = meetingRoom.getBookBy();
+			
+			if (bookBy != null) {
+				getMeetingRoomResponseDto.setBookedBy(meetingRoom.getBookBy());
+			} else {
+				getMeetingRoomResponseDto.setBookedBy("");
+			}
+			
+			results.add(getMeetingRoomResponseDto);
+			
+		});
+		
+		return results;
 		
 	}
 
