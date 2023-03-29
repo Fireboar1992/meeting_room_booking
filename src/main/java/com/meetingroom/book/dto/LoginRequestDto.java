@@ -1,10 +1,12 @@
 package com.meetingroom.book.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginRequestDto {
 	
+	@NotBlank
 	private String employeeId;
-	
-
+	@NotBlank
 	private String password;
 
 	public String getEmployeeId() {

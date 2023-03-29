@@ -1,9 +1,13 @@
 package com.meetingroom.book.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class CreateMeetingRoomRequestDto {
 	
+	@NotBlank
 	private String roomName;
-	
+	@NotNull
 	private Integer capacity;
 
 	public String getRoomName() {

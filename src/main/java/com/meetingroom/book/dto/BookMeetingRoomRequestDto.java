@@ -1,13 +1,21 @@
 package com.meetingroom.book.dto;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.meetingroom.book.util.DateValidUtil;
+
+import jakarta.validation.constraints.NotBlank;
+
+@Validated
 public class BookMeetingRoomRequestDto {
 	
+	@NotBlank
 	private String roomName;
-	
+	@DateValidUtil
 	private String startTime;
-	
+	@DateValidUtil
 	private String endTime;
-	
+	@NotBlank
 	private String bookedBy;
 
 	public String getRoomName() {
