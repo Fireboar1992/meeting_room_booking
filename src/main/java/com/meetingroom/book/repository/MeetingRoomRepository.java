@@ -16,4 +16,6 @@ public interface MeetingRoomRepository extends JpaRepository<MeetingRoomEntity, 
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	public Optional<MeetingRoomEntity> findByName(String roomName);
 	
+	public Optional<List<MeetingRoomEntity>> findByStatus(int status);
+	
 }
