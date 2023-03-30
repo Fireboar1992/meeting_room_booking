@@ -11,7 +11,7 @@ Configuration of the Project:
 2. MySql
 
 Step 1. execute these sql syntax
-
+```
   CREATE TABLE `meeting_room`.`meeting_room` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(120) NOT NULL,
@@ -35,7 +35,7 @@ Step 1. execute these sql syntax
   UNIQUE INDEX `password_UNIQUE` (`password` ASC) VISIBLE);
   
   INSERT INTO meeting_room.user (username, password) VALUES('MRB001', 'MRB001@pwd');
-  
+```  
  Step 2. check api by postman
  
  import the file 'MeetingRoomBooking.postman_collection.json'
