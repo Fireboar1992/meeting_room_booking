@@ -218,6 +218,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "cancelBookedRoom",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roomName\": \"Big Room\",\r\n    \"canceledBy\": \"sung\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/book/cancelBookedRoom",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"book",
+						"cancelBookedRoom"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
