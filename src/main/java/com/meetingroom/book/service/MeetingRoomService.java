@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.meetingroom.book.dto.BookMeetingRoomRequestDto;
+import com.meetingroom.book.dto.CancelBookedRoomRequestDto;
 import com.meetingroom.book.dto.CreateMeetingRoomRequestDto;
 import com.meetingroom.book.dto.CreateMeetingRoomResponseDto;
 import com.meetingroom.book.dto.GetMeetingRoomResponseDto;
@@ -147,6 +148,55 @@ public class MeetingRoomService {
 		meetingRoomRepository.save(meetingRoomEntity);
 		
 		return "The " + roomName + " is successfully booked";
+		
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public String cancelBookedRoom(CancelBookedRoomRequestDto cancelBookedRoomRequestDto) throws Exception {
+		
+		String roomName = cancelBookedRoomRequestDto.getRoomName();
+		
+		Optional<MeetingRoomEntity> selectedMeetingRoom;
+
+		try {
+
+			selectedMeetingRoom = meetingRoomRepository.findByName(roomName);
+		
+		} catch (org.springframework.dao.PessimisticLockingFailureException e) {
+
+			return "The " + roomName + " is being canceling or booking";
+
+		}
+		
+		MeetingRoomEntity selectedMeetingRoomEntity = new MeetingRoomEntity();
+		if (selectedMeetingRoom.isPresent()) {
+			selectedMeetingRoomEntity = selectedMeetingRoom.get();
+		}
+		
+		if (selectedMeetingRoomEntity.getId() == null) {
+			throw new Exception();
+		}
+		
+		if (selectedMeetingRoomEntity.getStatus() == STATUS_AVAILABLE) {
+			
+			return "The " + roomName + " is be canceled";
+			
+		}
+		
+		Date date = new Date();
+		
+		MeetingRoomEntity meetingRoomEntity = new MeetingRoomEntity();
+		meetingRoomEntity.setId(selectedMeetingRoomEntity.getId());
+		meetingRoomEntity.setName(selectedMeetingRoomEntity.getName());
+		meetingRoomEntity.setCapacity(selectedMeetingRoomEntity.getCapacity());
+		meetingRoomEntity.setStatus(STATUS_AVAILABLE);
+		meetingRoomEntity.setLastUpdateTime(date);
+		meetingRoomEntity.setBookBy("sung");
+		
+		meetingRoomRepository.flush();
+		meetingRoomRepository.save(meetingRoomEntity);
+		
+		return "The " + roomName + " is successfully canceled";
 		
 	}
 	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meetingroom.book.dto.BookMeetingRoomRequestDto;
+import com.meetingroom.book.dto.CancelBookedRoomRequestDto;
 import com.meetingroom.book.dto.CreateMeetingRoomRequestDto;
 import com.meetingroom.book.dto.CreateMeetingRoomResponseDto;
 import com.meetingroom.book.dto.GetMeetingRoomResponseDto;
@@ -67,13 +68,11 @@ public class BookController {
 		
 	}
 	
-//	@PutMapping(path = "/cancelBookedRoom")
-//	public String cancelBookedRoom() {
-//		
-//		String response = meetingRoomService.cancelBookedRoom();
-//		
-//		return response;
-//			
-//	}
+	@PutMapping(path = "/cancelBookedRoom")
+	public String cancelBookedRoom(@Validated @RequestBody CancelBookedRoomRequestDto cancelBookedRoomRequestDto) throws Exception {
+		
+		return meetingRoomService.cancelBookedRoom(cancelBookedRoomRequestDto);
+		
+	}
 	
 }
