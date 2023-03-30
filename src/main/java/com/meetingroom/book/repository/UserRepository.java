@@ -6,6 +6,6 @@ import com.meetingroom.book.entity.UserEntity;
 
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
 	
-	public UserEntity findByEmployeeId(String employeeId);
+	public UserEntity findByUsername(String username);
 
 }

@@ -1,11 +1,11 @@
 package com.meetingroom.book.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
@@ -15,8 +15,8 @@ public class UserEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "employeeId", length=120, nullable=false, unique=true)
-	private String employeeId;
+	@Column(name = "username", length=120, nullable=false, unique=true)
+	private String username;
 	
 	@Column(name = "password", length=120, nullable=false, unique=true)
 	private String password;
@@ -29,12 +29,12 @@ public class UserEntity {
 		this.id = id;
 	}
 
-	public String getEmployeeId() {
-		return employeeId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

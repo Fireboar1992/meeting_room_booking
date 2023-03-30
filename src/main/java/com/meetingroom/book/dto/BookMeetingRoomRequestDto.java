@@ -4,7 +4,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.meetingroom.book.util.DateValidUtil;
 
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 @Validated
 public class BookMeetingRoomRequestDto {

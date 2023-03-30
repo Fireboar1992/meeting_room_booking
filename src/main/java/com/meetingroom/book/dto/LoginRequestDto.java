@@ -1,20 +1,20 @@
 package com.meetingroom.book.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 public class LoginRequestDto {
 	
 	@NotBlank
-	private String employeeId;
+	private String username;
 	@NotBlank
 	private String password;
 
-	public String getEmployeeId() {
-		return employeeId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
