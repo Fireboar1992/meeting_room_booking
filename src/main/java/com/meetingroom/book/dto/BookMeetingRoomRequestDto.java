@@ -11,9 +11,9 @@ public class BookMeetingRoomRequestDto {
 	
 	@NotBlank
 	private String roomName;
-	@DateValidUtil
+	@NotBlank
 	private String startTime;
-	@DateValidUtil
+	@NotBlank
 	private String endTime;
 	@NotBlank
 	private String bookedBy;

@@ -1,26 +1,20 @@
 package com.meetingroom.book.dto;
 
-import javax.validation.constraints.NotBlank;
-
-public class LoginRequestDto {
+public class AuthRequestDto {
 	
-	@NotBlank
-	private String username;
-	@NotBlank
-	private String password;
-
+    private String username;
+    
+    private String password;
+    
 	public String getUsername() {
 		return username;
 	}
-
-	public void setUsername(String username) {
+	public void setUserName(String username) {
 		this.username = username;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
